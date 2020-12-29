@@ -37,7 +37,7 @@ AudioDecoder::AudioDecoder(const std::shared_ptr<CatInterface> &cat_interface,
   /* Create the recording stream */
   int error;
   if (!(this->audio_stream_ =
-            pa_simple_new(NULL, "qcx_cat_fsk", PA_STREAM_RECORD, NULL, "record",
+            pa_simple_new(NULL, "qcx_cat_ft8", PA_STREAM_RECORD, NULL, "record",
                           &ss, NULL, NULL, &error))) {
     throw std::runtime_error(pa_strerror(error));
   }
