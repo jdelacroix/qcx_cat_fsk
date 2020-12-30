@@ -3,7 +3,9 @@ cmake_minimum_required(VERSION 3.0)
 project(qcx_cat_fsk)
 
 find_package(PulseAudio REQUIRED)
-find_package(Boost REQUIRED COMPONENTS log log_setup)
+find_package(Boost COMPONENTS log log_setup REQUIRED)
+
+add_definitions(-DBOOST_LOG_DYN_LINK)
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
@@ -18,5 +20,6 @@ add_executable(qcx_cat_ft8
 
 set_property(TARGET qcx_cat_ft8 PROPERTY CXX_STANDARD 17)
 
+
 target_link_libraries(qcx_cat_ft8
-    ${PULSEAUDIO_LIBRARY} pulse-simple ${Boost_LIBRARIES} pthread)
+    ${PULSEAUDIO_LIBRARY} pulse-simple ${Boost_LOG_LIBRARY} ${Boost_LOG_SETUP_LIBRARY} pthread)
