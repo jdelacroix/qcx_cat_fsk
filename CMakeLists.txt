@@ -22,4 +22,4 @@ set_property(TARGET qcx_cat_ft8 PROPERTY CXX_STANDARD 17)
 
 
 target_link_libraries(qcx_cat_ft8
-    ${PULSEAUDIO_LIBRARY} pulse-simple ${Boost_LOG_LIBRARY} ${Boost_LOG_SETUP_LIBRARY} pthread)
+    ${PULSEAUDIO_LIBRARY} pulse-simple ${Boost_LIBRARIES} pthread)
