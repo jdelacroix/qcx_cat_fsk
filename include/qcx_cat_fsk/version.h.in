@@ -17,33 +17,7 @@
 
 #pragma once
 
-#include <pulse/error.h>
-#include <pulse/simple.h>
-
-#include <memory>
-#include <mutex>
-
-#include "qcx_cat_fsk/cat_interface.h"
-
-namespace qcx_cat_fsk {
-
-class AudioDecoder {
- public:
-  AudioDecoder(const std::shared_ptr<CatInterface>& cat_interface,
-               const uint32_t& vfo_a_hz,
-               const uint32_t& vfo_b_hz);
-  ~AudioDecoder();
-
-  void Decode();
-
- private:
-  pa_simple* audio_stream_;
-
-  uint32_t vfo_a_hz_, vfo_b_hz_;
-  std::mutex vfo_b_mutex_;
-
-  std::shared_ptr<CatInterface> cat_interface_;
-
-  bool is_tx_on_;
-};
-}  // namespace qcx_cat_fsk
+#define VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define VERSION_PATCH @PROJECT_VERSION_PATCH@
+#define VERSION_TWEAK @PROJECT_VERSION_TWEAK@

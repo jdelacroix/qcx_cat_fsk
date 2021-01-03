@@ -27,8 +27,8 @@
 namespace qcx_cat_fsk {
 
 AudioDecoder::AudioDecoder(const std::shared_ptr<CatInterface> &cat_interface,
-                           const uint32_t &vfo_b_hz)
-    : vfo_b_hz_(vfo_b_hz), cat_interface_(cat_interface), is_tx_on_(false) {
+                           const uint32_t &vfo_a_hz, const uint32_t &vfo_b_hz)
+    : vfo_a_hz_(vfo_a_hz), vfo_b_hz_(vfo_b_hz), cat_interface_(cat_interface), is_tx_on_(false) {
   uint32_t audio_sample_rate_hz = 48000;
 
   static const pa_sample_spec ss = {
@@ -57,6 +57,12 @@ void AudioDecoder::Decode() {
 
   int error;
 
+  std::ostringstream vfo_a_cmd_sstream;
+  vfo_a_cmd_sstream << "FA" << std::setfill('0') << std::setw(11)
+                    << this->vfo_a_hz_
+                    << ";";
+  std::string vfo_a_cmd = vfo_a_cmd_sstream.str();
+
   for (;;) {
     std::vector<int16_t> audio_chunk(512, 0);
     /* Record some data ... */
@@ -81,7 +87,7 @@ void AudioDecoder::Decode() {
           try {
             auto reply =
                 this->cat_interface_->SendCommand("RX;", false);  // TQ0;
-            this->cat_interface_->SendCommand("FA00007074700;", false);
+            this->cat_interface_->SendCommand(vfo_a_cmd, false);
             BOOST_LOG_TRIVIAL(info) << "RX; " << reply;
             is_tx_on_ = false;
           } catch (...) {
