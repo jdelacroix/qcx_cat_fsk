@@ -30,3 +30,5 @@ Mandatory arguments to long options are mandatory for short options too.
 
 Report bugs at <https://github.com/jdelacroix/qcx_cat_fsk/issues>.
 ```
+
+For example, `qcx_cat_ft8 /dev/ttyACM1 7.074` for FT8 with WSJT-X on 40m.
